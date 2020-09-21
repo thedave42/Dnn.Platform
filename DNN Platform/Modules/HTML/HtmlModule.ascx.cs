@@ -33,9 +33,9 @@ namespace DotNetNuke.Modules.Html
         private bool EditorEnabled;
         private int WorkflowID;
 
-        public HtmlModule()
+        public HtmlModule(INavigationManager navigationManager)
         {
-            this._navigationManager = this.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         /// -----------------------------------------------------------------------------

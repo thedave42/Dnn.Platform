@@ -13,9 +13,7 @@ namespace DotNetNuke.Web.Common
 
     using Microsoft.Extensions.DependencyInjection;
 
-    /// <summary>
-    /// Service provider implementation for <see cref="HttpRuntime.WebObjectActivator"/>.
-    /// </summary>
+    /// <summary>Service provider implementation for <see cref="HttpRuntime.WebObjectActivator"/>.</summary>
     internal class WebFormsServiceProvider : IServiceProvider
     {
         private const BindingFlags ActivatorFlags =
@@ -26,33 +24,37 @@ namespace DotNetNuke.Web.Common
 
         private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(WebFormsServiceProvider));
 
+        private readonly IServiceProvider globalServiceProvider;
+
+        public WebFormsServiceProvider(IServiceProvider globalServiceProvider)
+        {
+            this.globalServiceProvider = globalServiceProvider;
+        }
+
         /// <inheritdoc />
         public object GetService(Type serviceType)
         {
             bool hasHttpContext;
-            bool hasScope;
             IServiceProvider provider = null;
             if (HttpContextSource.Current == null)
             {
                 hasHttpContext = false;
-                hasScope = false;
             }
             else
             {
                 hasHttpContext = true;
+
                 var scope = HttpContextSource.Current.GetScope();
                 if (scope == null)
                 {
-                    hasScope = false;
+                    HttpContextSource.Current.SetScope(this.globalServiceProvider);
+                    scope = HttpContextSource.Current.GetScope();
                 }
-                else
-                {
-                    hasScope = true;
-                    provider = scope.ServiceProvider;
-                }
+
+                provider = scope.ServiceProvider;
             }
 
-            Logger.WarnFormat("Resolving {0} with {1} (context: {2}, scope: {3}, interface: {4}, constructors: {5})", serviceType, provider, hasHttpContext, hasScope, serviceType.IsInterface, serviceType.GetConstructors().Length);
+            Logger.WarnFormat("Resolving {0} with {1} (context: {2}, interface: {3}, constructors: {4})", serviceType, provider, hasHttpContext, serviceType.IsInterface, serviceType.GetConstructors().Length);
 
             return provider != null && (serviceType.IsInterface || serviceType.GetConstructors().Length > 0)
                 ? ActivatorUtilities.GetServiceOrCreateInstance(provider, serviceType)

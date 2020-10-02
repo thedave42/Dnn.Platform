@@ -42,18 +42,17 @@ namespace DotNetNuke.Tests.Web.Api.Internals
         public void CreateInstanceFromScope()
         {
             // Arrange
-            var scope = Globals.DependencyProvider.CreateScope();
+            var provider = new WebFormsServiceProvider(Globals.DependencyProvider);
 
             HttpContextHelper.RegisterMockHttpContext();
-            HttpContextSource.Current.SetScope(scope);
-
-            var provider = new WebFormsServiceProvider();
 
             // Act
             var instance = provider.GetService(typeof(IScopedService));
 
             // Assert
             Assert.NotNull(instance);
+
+            var scope = HttpContextSource.Current.GetScope();
             Assert.AreEqual(scope.ServiceProvider.GetRequiredService<IScopedService>(), instance);
         }
 
@@ -61,12 +60,9 @@ namespace DotNetNuke.Tests.Web.Api.Internals
         public void CreateInstanceWithProtectedConstructor()
         {
             // Arrange
-            var scope = Globals.DependencyProvider.CreateScope();
+            var provider = new WebFormsServiceProvider(Globals.DependencyProvider);
 
             HttpContextHelper.RegisterMockHttpContext();
-            HttpContextSource.Current.SetScope(scope);
-
-            var provider = new WebFormsServiceProvider();
 
             // Act
             var instance = provider.GetService(typeof(PageHandlerFactory));
@@ -80,12 +76,7 @@ namespace DotNetNuke.Tests.Web.Api.Internals
         public void CreateModuleWithSingletonService()
         {
             // Arrange
-            var scope = Globals.DependencyProvider.CreateScope();
-
-            HttpContextHelper.RegisterMockHttpContext();
-            HttpContextSource.Current.SetScope(scope);
-
-            var provider = new WebFormsServiceProvider();
+            var provider = new WebFormsServiceProvider(Globals.DependencyProvider);
             var service = Globals.DependencyProvider.GetRequiredService<SingletonService>();
 
             // Act
@@ -101,17 +92,14 @@ namespace DotNetNuke.Tests.Web.Api.Internals
         public void CreateModuleWithScopedService()
         {
             // Arrange
-            var scope = Globals.DependencyProvider.CreateScope();
-
+            var provider = new WebFormsServiceProvider(Globals.DependencyProvider);
             HttpContextHelper.RegisterMockHttpContext();
-            HttpContextSource.Current.SetScope(scope);
-
-            var provider = new WebFormsServiceProvider();
-            var serviceFromRequestScope = scope.ServiceProvider.GetRequiredService<IScopedService>();
-            var serviceFromGlobalScope = Globals.DependencyProvider.GetRequiredService<IScopedService>();
 
             // Act
             var module = provider.GetService<TestModule<IScopedService>>();
+            var scope = HttpContextSource.Current.GetScope();
+            var serviceFromRequestScope = scope.ServiceProvider.GetRequiredService<IScopedService>();
+            var serviceFromGlobalScope = Globals.DependencyProvider.GetRequiredService<IScopedService>();
 
             // Assert
             Assert.NotNull(module);

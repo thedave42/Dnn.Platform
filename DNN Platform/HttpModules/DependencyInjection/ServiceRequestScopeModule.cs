@@ -5,8 +5,8 @@
 using System;
 using System.Web;
 
+using DotNetNuke.Common;
 using DotNetNuke.Common.Extensions;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
 [assembly: PreApplicationStartMethod(typeof(DotNetNuke.HttpModules.DependencyInjection.ServiceRequestScopeModule), nameof(DotNetNuke.HttpModules.DependencyInjection.ServiceRequestScopeModule.InitModule))]
@@ -15,16 +15,9 @@ namespace DotNetNuke.HttpModules.DependencyInjection
 {
     public class ServiceRequestScopeModule : IHttpModule
     {
-        private static IServiceProvider _serviceProvider;
-
         public static void InitModule()
         {
             DynamicModuleUtility.RegisterModule(typeof(ServiceRequestScopeModule));
-        }
-
-        public static void SetServiceProvider(IServiceProvider serviceProvider)
-        {
-            _serviceProvider = serviceProvider;
         }
 
         public void Init(HttpApplication context)
@@ -57,13 +50,15 @@ namespace DotNetNuke.HttpModules.DependencyInjection
         private void Context_BeginRequest(object sender, EventArgs e)
         {
             var context = ((HttpApplication)sender).Context;
-            context.SetScope(_serviceProvider.CreateScope());
+            if (context.GetScope() == null)
+            {
+                context.SetScope(Globals.DependencyProvider);
+            }
         }
 
         private void Context_EndRequest(object sender, EventArgs e)
         {
             var context = ((HttpApplication)sender).Context;
-            context.GetScope()?.Dispose();
             context.ClearScope();
         }
     }

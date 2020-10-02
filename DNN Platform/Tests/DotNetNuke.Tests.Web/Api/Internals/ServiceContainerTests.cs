@@ -1,7 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information
-
 namespace DotNetNuke.Tests.Web.Api.Internals
 {
     using System.Web;
@@ -24,7 +23,7 @@ namespace DotNetNuke.Tests.Web.Api.Internals
 
             serviceCollection.AddTransient<INavigationManager>(container => Mock.Of<INavigationManager>());
             serviceCollection.AddTransient<IApplicationStatusInfo>(container => new DotNetNuke.Application.ApplicationStatusInfo(Mock.Of<IApplicationInfo>()));
-            
+
             Globals.DependencyProvider = serviceCollection.BuildServiceProvider();
         }
 
@@ -47,17 +46,15 @@ namespace DotNetNuke.Tests.Web.Api.Internals
         [Test]
         public void UseRequestScopeWhenPossible()
         {
-            var scope = Globals.DependencyProvider.CreateScope();
-
             HttpContextHelper.RegisterMockHttpContext();
-            HttpContextSource.Current.SetScope(scope);
+            HttpContextSource.Current.SetScope(Globals.DependencyProvider);
 
             Assert.NotNull(HttpContextSource.Current?.GetScope());
 
             var container = ServiceScopeContainer.GetRequestOrCreateScope();
 
             Assert.False(container.ShouldDispose);
-            Assert.AreEqual(scope, container.ServiceScope);
+            Assert.AreEqual(HttpContextSource.Current.GetScope(), container.ServiceScope);
         }
     }
 }

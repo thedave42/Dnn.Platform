@@ -132,8 +132,7 @@ namespace DotNetNuke.Web.Common.Internal
             var dependencyProvider = new LazyServiceProvider();
             Globals.DependencyProvider = dependencyProvider;
             dependencyProvider.SetProvider(DependencyInjectionInitialize.BuildServiceProvider());
-            ServiceRequestScopeModule.SetServiceProvider(Globals.DependencyProvider);
-            HttpRuntime.WebObjectActivator = new WebFormsServiceProvider();
+            HttpRuntime.WebObjectActivator = new WebFormsServiceProvider(Globals.DependencyProvider);
 
             ComponentFactory.Container = new SimpleContainer();
 

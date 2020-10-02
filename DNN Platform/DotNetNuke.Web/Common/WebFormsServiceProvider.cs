@@ -26,6 +26,8 @@ namespace DotNetNuke.Web.Common
 
         private readonly IServiceProvider globalServiceProvider;
 
+        /// <summary>Initializes a new instance of the <see cref="WebFormsServiceProvider"/> class.</summary>
+        /// <param name="globalServiceProvider">The service provider to use to create scopes for each request.</param>
         public WebFormsServiceProvider(IServiceProvider globalServiceProvider)
         {
             this.globalServiceProvider = globalServiceProvider;
@@ -34,16 +36,9 @@ namespace DotNetNuke.Web.Common
         /// <inheritdoc />
         public object GetService(Type serviceType)
         {
-            bool hasHttpContext;
             IServiceProvider provider = null;
-            if (HttpContextSource.Current == null)
+            if (HttpContextSource.Current != null)
             {
-                hasHttpContext = false;
-            }
-            else
-            {
-                hasHttpContext = true;
-
                 var scope = HttpContextSource.Current.GetScope();
                 if (scope == null)
                 {
@@ -54,18 +49,9 @@ namespace DotNetNuke.Web.Common
                 provider = scope.ServiceProvider;
             }
 
-            Logger.WarnFormat("Resolving {0} with {1} (context: {2}, interface: {3}, constructors: {4})", serviceType, provider, hasHttpContext, serviceType.IsInterface, serviceType.GetConstructors().Length);
-
             return provider != null && (serviceType.IsInterface || serviceType.GetConstructors().Length > 0)
-                ? ActivatorUtilities.GetServiceOrCreateInstance(provider, serviceType)
-                : Activator.CreateInstance(serviceType, ActivatorFlags, null, null, null);
-        }
-
-        /// <summary>Initializes a new instance of the <see cref="WebFormsServiceProvider"/> class.</summary>
-        /// <param name="globalServiceProvider">The service provider to use to create scopes for each request.</param>
-        public WebFormsServiceProvider(IServiceProvider globalServiceProvider)
-        {
-            this.globalServiceProvider = globalServiceProvider;
+                       ? ActivatorUtilities.GetServiceOrCreateInstance(provider, serviceType)
+                       : Activator.CreateInstance(serviceType, ActivatorFlags, null, null, null);
         }
     }
 }

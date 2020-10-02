@@ -24,11 +24,9 @@ namespace DotNetNuke.Modules.Groups
     /// -----------------------------------------------------------------------------
     public partial class View : GroupsModuleBase
     {
-        private readonly INavigationManager _navigationManager;
-
-        public View()
+        public View(INavigationManager navigationManager)
+            : base(navigationManager)
         {
-            this._navigationManager = this.DependencyProvider.GetRequiredService<INavigationManager>();
         }
 
         protected override void OnInit(EventArgs e)
@@ -56,7 +54,7 @@ namespace DotNetNuke.Modules.Groups
                 {
                     if (this.TabId != this.GroupListTabId && !this.UserInfo.IsInRole(this.PortalSettings.AdministratorRoleName))
                     {
-                        this.Response.Redirect(this._navigationManager.NavigateURL(this.GroupListTabId));
+                        this.Response.Redirect(this.NavigationManager.NavigateURL(this.GroupListTabId));
                     }
                 }
 

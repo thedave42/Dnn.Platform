@@ -26,9 +26,9 @@ namespace DotNetNuke.Modules.Admin.Tabs
         private readonly INavigationManager _navigationManager;
         private TabInfo _tab;
 
-        public Export()
+        public Export(INavigationManager navigationManager)
         {
-            this._navigationManager = this.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         public TabInfo Tab

@@ -27,9 +27,9 @@ namespace DotNetNuke.UI.Skins.Controls
         private const string MyFileName = "UserAndLogin.ascx";
         private readonly INavigationManager _navigationManager;
 
-        public UserAndLogin()
+        public UserAndLogin(INavigationManager navigationManager)
         {
-            this._navigationManager = Globals.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         /// <summary>

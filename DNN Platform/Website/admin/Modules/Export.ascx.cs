@@ -41,9 +41,9 @@ namespace DotNetNuke.Modules.Admin.Modules
         private new int ModuleId = -1;
         private ModuleInfo _module;
 
-        public Export()
+        public Export(INavigationManager navigationManager)
         {
-            this._navigationManager = this.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         private ModuleInfo Module

@@ -2,6 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information
 
+using DotNetNuke.Abstractions;
+
 namespace DotNetNuke.Modules.Groups
 {
     using System;
@@ -23,6 +25,11 @@ namespace DotNetNuke.Modules.Groups
 
     public partial class GroupView : GroupsModuleBase
     {
+        public GroupView(INavigationManager navigationManager)
+            : base(navigationManager)
+        {
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             RoleInfo role = RoleController.Instance.GetRole(this.PortalId, r => r.SecurityMode != SecurityMode.SecurityRole && r.RoleID == this.GroupId);

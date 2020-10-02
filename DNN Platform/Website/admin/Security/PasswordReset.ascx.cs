@@ -34,9 +34,9 @@ namespace DotNetNuke.Modules.Admin.Security
         private readonly INavigationManager _navigationManager;
         private string _ipAddress;
 
-        public PasswordReset()
+        public PasswordReset(INavigationManager navigationManager)
         {
-            this._navigationManager = this.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         private string ResetToken

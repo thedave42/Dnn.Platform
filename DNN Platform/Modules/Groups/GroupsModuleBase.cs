@@ -16,8 +16,13 @@ namespace DotNetNuke.Modules.Groups
     public class GroupsModuleBase : PortalModuleBase
     {
         public GroupsModuleBase()
+            : this(null)
         {
-            this.NavigationManager = this.DependencyProvider.GetRequiredService<INavigationManager>();
+        }
+
+        public GroupsModuleBase(INavigationManager navigationManager)
+        {
+            this.NavigationManager = navigationManager ?? this.DependencyProvider.GetRequiredService<INavigationManager>();
         }
 
         public enum GroupMode

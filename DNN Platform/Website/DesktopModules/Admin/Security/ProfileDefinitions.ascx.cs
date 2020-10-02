@@ -41,9 +41,9 @@ namespace DotNetNuke.Modules.Admin.Users
         private ProfilePropertyDefinitionCollection _profileProperties;
         private bool _requiredColumnHidden = false;
 
-        public ProfileDefinitions()
+        public ProfileDefinitions(INavigationManager navigationManager)
         {
-            this._navigationManager = this.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         /// -----------------------------------------------------------------------------

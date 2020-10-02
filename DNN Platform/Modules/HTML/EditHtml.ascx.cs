@@ -38,9 +38,9 @@ namespace DotNetNuke.Modules.Html
         private readonly HtmlTextLogController _htmlTextLogController = new HtmlTextLogController();
         private readonly WorkflowStateController _workflowStateController = new WorkflowStateController();
 
-        public EditHtml()
+        public EditHtml(INavigationManager navigationManager)
         {
-            this._navigationManager = this.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         private enum WorkflowType

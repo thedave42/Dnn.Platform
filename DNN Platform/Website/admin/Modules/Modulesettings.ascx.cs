@@ -49,9 +49,9 @@ namespace DotNetNuke.Modules.Admin.Modules
         private Control _control;
         private ModuleInfo _module;
 
-        public ModuleSettingsPage()
+        public ModuleSettingsPage(INavigationManager navigationManager)
         {
-            this._navigationManager = this.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         private bool HideDeleteButton => this.Request.QueryString["HideDelete"] == "true";

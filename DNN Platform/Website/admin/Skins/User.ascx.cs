@@ -33,9 +33,9 @@ namespace DotNetNuke.UI.Skins.Controls
         private const string MyFileName = "User.ascx";
         private readonly INavigationManager _navigationManager;
 
-        public User()
+        public User(INavigationManager navigationManager)
         {
-            this._navigationManager = Globals.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
             this.ShowUnreadMessages = true;
             this.ShowAvatar = true;
             this.LegacyMode = true;

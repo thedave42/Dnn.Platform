@@ -45,9 +45,9 @@ namespace DotNetNuke.Modules.Admin.Users
         private readonly List<AuthenticationLoginBase> _loginControls = new List<AuthenticationLoginBase>();
         private readonly INavigationManager _navigationManager;
 
-        public Register()
+        public Register(INavigationManager navigationManager)
         {
-            this._navigationManager = this.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         protected string ExcludeTerms

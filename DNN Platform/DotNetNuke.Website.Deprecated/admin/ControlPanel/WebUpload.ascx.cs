@@ -50,9 +50,9 @@ namespace DotNetNuke.Modules.Admin.FileManager
         private string _RootFolder;
         private string _UploadRoles;
 
-        public WebUpload()
+        public WebUpload(INavigationManager navigationManager)
         {
-            this._navigationManager = this.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         public string DestinationFolder

@@ -51,9 +51,9 @@ namespace DotNetNuke.Modules.Admin.Security
         private int _totalPages = 1;
         private int _totalRecords;
 
-        public SecurityRoles()
+        public SecurityRoles(INavigationManager navigationManager)
         {
-            this._navigationManager = this.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         public ModuleActionCollection ModuleActions

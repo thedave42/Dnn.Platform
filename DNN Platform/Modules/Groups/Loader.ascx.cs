@@ -2,6 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information
 
+using DotNetNuke.Abstractions;
+
 namespace DotNetNuke.Modules.Groups
 {
     using System;
@@ -15,6 +17,11 @@ namespace DotNetNuke.Modules.Groups
 
     public partial class Loader : GroupsModuleBase
     {
+        public Loader(INavigationManager navigationManager)
+            : base(navigationManager)
+        {
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             string path = Constants.ModulePath;
@@ -31,8 +38,7 @@ namespace DotNetNuke.Modules.Groups
                     break;
             }
 
-            GroupsModuleBase ctl = new GroupsModuleBase();
-            ctl = (GroupsModuleBase)this.LoadControl(path);
+            GroupsModuleBase ctl = (GroupsModuleBase)this.LoadControl(path);
             ctl.ModuleConfiguration = this.ModuleConfiguration;
             this.plhContent.Controls.Add(ctl);
         }

@@ -17,11 +17,9 @@ namespace DotNetNuke.Modules.Groups
 
     public partial class GroupEdit : GroupsModuleBase
     {
-        private readonly INavigationManager _navigationManager;
-
-        public GroupEdit()
+        public GroupEdit(INavigationManager navigationManager)
+            : base(navigationManager)
         {
-            this._navigationManager = this.DependencyProvider.GetRequiredService<INavigationManager>();
         }
 
         protected override void OnInit(EventArgs e)
@@ -162,7 +160,7 @@ namespace DotNetNuke.Modules.Groups
                     DataCache.RemoveCache("GetRoles");
                 }
 
-                this.Response.Redirect(this._navigationManager.NavigateURL(this.TabId, string.Empty, new string[] { "groupid=" + this.GroupId.ToString() }));
+                this.Response.Redirect(this.NavigationManager.NavigateURL(this.TabId, string.Empty, new string[] { "groupid=" + this.GroupId.ToString() }));
             }
         }
     }

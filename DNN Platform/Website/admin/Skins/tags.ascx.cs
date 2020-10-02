@@ -24,9 +24,9 @@ namespace DotNetNuke.UI.Skins.Controls
         private bool _ShowCategories = true;
         private bool _ShowTags = true;
 
-        public Tags()
+        public Tags(INavigationManager navigationManager)
         {
-            this._navigationManager = Globals.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         public string AddImageUrl

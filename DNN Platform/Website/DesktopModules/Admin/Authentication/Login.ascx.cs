@@ -65,9 +65,9 @@ namespace DotNetNuke.Modules.Admin.Authentication
         private readonly List<AuthenticationLoginBase> _defaultauthLogin = new List<AuthenticationLoginBase>();
         private readonly List<OAuthLoginBase> _oAuthControls = new List<OAuthLoginBase>();
 
-        public Login()
+        public Login(INavigationManager navigationManager)
         {
-            this._navigationManager = this.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         /// <summary>

@@ -37,9 +37,9 @@ namespace DotNetNuke.Modules.Admin.Users
     {
         private readonly INavigationManager _navigationManager;
 
-        public ManageUsers()
+        public ManageUsers(INavigationManager navigationManager)
         {
-            this._navigationManager = this.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         public ModuleActionCollection ModuleActions

@@ -26,9 +26,9 @@ namespace DotNetNuke.Modules.Admin.Sales
         private readonly INavigationManager _navigationManager;
         private int RoleID = -1;
 
-        public Purchase()
+        public Purchase(INavigationManager navigationManager)
         {
-            this._navigationManager = this.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         protected override void OnInit(EventArgs e)

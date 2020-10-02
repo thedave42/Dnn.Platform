@@ -25,9 +25,9 @@ namespace DotNetNuke.UI.Skins.Controls
 
         private readonly INavigationManager _navigationManager;
 
-        public Login()
+        public Login(INavigationManager navigationManager)
         {
-            this._navigationManager = Globals.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
             this.LegacyMode = true;
         }
 

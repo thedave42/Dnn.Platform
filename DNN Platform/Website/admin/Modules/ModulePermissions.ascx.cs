@@ -33,9 +33,9 @@ namespace DotNetNuke.Modules.Admin.Modules
         private int _moduleId = -1;
         private ModuleInfo _module;
 
-        public ModulePermissions()
+        public ModulePermissions(INavigationManager navigationManager)
         {
-            this._navigationManager = this.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         private ModuleInfo Module

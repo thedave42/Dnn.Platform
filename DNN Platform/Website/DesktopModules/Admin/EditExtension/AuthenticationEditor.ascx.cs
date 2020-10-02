@@ -27,9 +27,9 @@ namespace DotNetNuke.Modules.Admin.EditExtension
         private AuthenticationInfo _AuthSystem;
         private AuthenticationSettingsBase _SettingsControl;
 
-        public AuthenticationEditor()
+        public AuthenticationEditor(INavigationManager navigationManager)
         {
-            this._navigationManager = Globals.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         protected AuthenticationInfo AuthSystem

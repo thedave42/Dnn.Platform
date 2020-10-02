@@ -29,9 +29,9 @@ namespace DotNetNuke.UI.Skins.Controls
         private string _homeUrl = string.Empty;
         private string _homeTabName = "Root";
 
-        public BreadCrumb()
+        public BreadCrumb(INavigationManager navigationManager)
         {
-            this._navigationManager = Globals.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         public int ProfileUserId

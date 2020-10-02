@@ -13,9 +13,10 @@ namespace DotNetNuke.Modules.Groups
 
     public partial class List : GroupsModuleBase
     {
-        public List()
+        public List(INavigationManager navigationManager)
+            : base(navigationManager)
         {
-            this._navigationManager = this.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         public INavigationManager _navigationManager { get; }

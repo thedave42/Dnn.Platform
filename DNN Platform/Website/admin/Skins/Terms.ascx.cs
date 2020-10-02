@@ -22,9 +22,9 @@ namespace DotNetNuke.UI.Skins.Controls
         private const string MyFileName = "Terms.ascx";
         private readonly INavigationManager _navigationManager;
 
-        public Terms()
+        public Terms(INavigationManager navigationManager)
         {
-            this._navigationManager = Globals.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         public string Text { get; set; }

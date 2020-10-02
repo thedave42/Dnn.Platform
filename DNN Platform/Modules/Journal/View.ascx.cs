@@ -55,9 +55,9 @@ namespace DotNetNuke.Modules.Journal
         public bool IsPublicGroup = false;
         private readonly INavigationManager _navigationManager;
 
-        public View()
+        public View(INavigationManager navigationManager)
         {
-            this._navigationManager = this.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         protected override void OnInit(EventArgs e)

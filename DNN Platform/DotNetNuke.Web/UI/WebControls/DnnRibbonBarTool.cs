@@ -31,9 +31,9 @@ namespace DotNetNuke.Web.UI.WebControls
         private DnnTextLink _dnnLink;
         private DnnTextButton _dnnLinkButton;
 
-        public DnnRibbonBarTool()
+        public DnnRibbonBarTool(INavigationManager navigationManager)
         {
-            this.NavigationManager = Globals.DependencyProvider.GetRequiredService<INavigationManager>();
+            this.NavigationManager = navigationManager;
         }
 
         public virtual RibbonBarToolInfo ToolInfo

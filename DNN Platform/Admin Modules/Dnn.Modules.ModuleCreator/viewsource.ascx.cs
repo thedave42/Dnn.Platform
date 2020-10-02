@@ -26,9 +26,9 @@ namespace Dnn.Module.ModuleCreator
     {
         private readonly INavigationManager _navigationManager;
 
-        public ViewSource()
+        public ViewSource(INavigationManager navigationManager)
         {
-            this._navigationManager = this.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         protected int ModuleControlId

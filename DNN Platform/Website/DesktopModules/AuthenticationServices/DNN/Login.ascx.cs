@@ -32,9 +32,9 @@ namespace DotNetNuke.Modules.Admin.Authentication.DNN
         private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(Login));
         private readonly INavigationManager _navigationManager;
 
-        public Login()
+        public Login(INavigationManager navigationManager)
         {
-            this._navigationManager = this.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         /// <summary>

@@ -30,9 +30,9 @@ namespace DotNetNuke.Modules.Admin.Tabs
 
         private TabInfo _tab;
 
-        public Import()
+        public Import(INavigationManager navigationManager)
         {
-            this._navigationManager = this.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         public TabInfo Tab

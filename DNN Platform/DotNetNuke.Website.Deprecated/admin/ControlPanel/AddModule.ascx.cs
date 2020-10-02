@@ -43,9 +43,9 @@ namespace DotNetNuke.UI.ControlPanel
         private readonly INavigationManager _navigationManager;
         private bool _enabled = true;
 
-        public AddModule()
+        public AddModule(INavigationManager navigationManager)
         {
-            this._navigationManager = Globals.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         public override bool Visible

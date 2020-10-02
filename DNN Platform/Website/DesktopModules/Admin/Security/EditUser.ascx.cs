@@ -40,9 +40,9 @@ namespace DotNetNuke.Modules.Admin.Users
         private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(EditUser));
         private readonly INavigationManager _navigationManager;
 
-        public EditUser()
+        public EditUser(INavigationManager navigationManager)
         {
-            this._navigationManager = this.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         /// -----------------------------------------------------------------------------

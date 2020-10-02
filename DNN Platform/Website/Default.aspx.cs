@@ -59,9 +59,9 @@ namespace DotNetNuke.Framework
             "<meta([^>])+name=('|\")robots('|\")",
             RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled);
 
-        public DefaultPage()
+        public DefaultPage(INavigationManager navigationManager)
         {
-            this.NavigationManager = Globals.DependencyProvider.GetRequiredService<INavigationManager>();
+            this.NavigationManager = navigationManager;
         }
 
         public string CurrentSkinPath

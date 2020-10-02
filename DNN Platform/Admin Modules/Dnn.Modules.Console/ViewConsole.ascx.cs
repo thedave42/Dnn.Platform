@@ -37,9 +37,9 @@ namespace Dnn.Modules.Console
         private int _groupTabID = -1;
         private IList<TabInfo> _tabs;
 
-        public ViewConsole()
+        public ViewConsole(INavigationManager navigationManager)
         {
-            this._navigationManager = this.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         public bool AllowSizeChange

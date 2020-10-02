@@ -37,9 +37,9 @@ namespace DotNetNuke.Modules.Admin.EditExtension
         private Control _control;
         private PackageInfo _package;
 
-        public EditExtension()
+        public EditExtension(INavigationManager navigationManager)
         {
-            this._navigationManager = Globals.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         public string Mode

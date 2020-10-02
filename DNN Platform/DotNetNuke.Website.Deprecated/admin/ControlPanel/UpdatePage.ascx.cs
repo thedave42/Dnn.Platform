@@ -29,9 +29,9 @@ namespace DotNetNuke.UI.ControlPanel
 
         private TabInfo _currentTab;
 
-        public UpdatePage()
+        public UpdatePage(INavigationManager navigationManager)
         {
-            this._navigationManager = Globals.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         public override bool Visible

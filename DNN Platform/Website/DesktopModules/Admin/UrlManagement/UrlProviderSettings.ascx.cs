@@ -20,9 +20,9 @@ namespace DotNetNuke.Modules.UrlManagement
         private int _providerId;
         private IExtensionUrlProviderSettingsControl _providerSettingsControl;
 
-        public ProviderSettings()
+        public ProviderSettings(INavigationManager navigationManager)
         {
-            this._navigationManager = Globals.DependencyProvider.GetService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         private string DisplayMode => (this.Request.QueryString["Display"] ?? string.Empty).ToLowerInvariant();

@@ -22,9 +22,9 @@ namespace DotNetNuke.UI.Skins.Controls
         private const string MyFileName = "Privacy.ascx";
         private readonly INavigationManager _navigationManager;
 
-        public Privacy()
+        public Privacy(INavigationManager navigationManager)
         {
-            this._navigationManager = Globals.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         public string Text { get; set; }

@@ -20,9 +20,9 @@ namespace DotNetNuke.Modules.Html
     {
         private readonly INavigationManager _navigationManager;
 
-        public MyWork()
+        public MyWork(INavigationManager navigationManager)
         {
-            this._navigationManager = this.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         public string FormatURL(object dataItem)

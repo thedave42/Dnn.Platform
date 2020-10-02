@@ -50,10 +50,10 @@ namespace DotNetNuke.Modules.DigitalAssets
         private readonly INavigationManager _navigationManager;
         private NameValueCollection damState;
 
-        public View()
+        public View(INavigationManager navigationManager)
         {
             this.controller = new Factory().DigitalAssetsController;
-            this._navigationManager = this.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         public ModuleActionCollection ModuleActions

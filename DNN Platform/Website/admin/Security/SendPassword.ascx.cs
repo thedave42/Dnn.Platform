@@ -41,9 +41,9 @@ namespace DotNetNuke.Modules.Admin.Security
         private int _userCount = Null.NullInteger;
         private string _ipAddress;
 
-        public SendPassword()
+        public SendPassword(INavigationManager navigationManager)
         {
-            this._navigationManager = this.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         /// <summary>

@@ -29,9 +29,9 @@ namespace DotNetNuke.UI.Skins.Controls
         private static readonly string ToastCacheKey = "DNN_Toast_Config";
         private readonly INavigationManager _navigationManager;
 
-        public Toast()
+        public Toast(INavigationManager navigationManager)
         {
-            this._navigationManager = Globals.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         protected string ServiceModuleName { get; private set; }

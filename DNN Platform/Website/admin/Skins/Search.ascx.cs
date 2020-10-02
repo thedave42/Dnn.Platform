@@ -39,9 +39,9 @@ namespace DotNetNuke.UI.Skins.Controls
 
         private bool _enableWildSearch = true;
 
-        public Search()
+        public Search(INavigationManager navigationManager)
         {
-            this._navigationManager = Globals.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         public string SeeMoreText

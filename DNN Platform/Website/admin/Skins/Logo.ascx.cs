@@ -23,9 +23,9 @@ namespace DotNetNuke.UI.Skins.Controls
         private readonly INavigationManager navigationManager;
 
         /// <summary>Initializes a new instance of the <see cref="Logo"/> class.</summary>
-        public Logo()
+        public Logo(INavigationManager navigationManager)
         {
-            this.navigationManager = Globals.DependencyProvider.GetRequiredService<INavigationManager>();
+            this.navigationManager = navigationManager;
         }
 
         /// <summary>Gets or sets the width of the border around the image.</summary>

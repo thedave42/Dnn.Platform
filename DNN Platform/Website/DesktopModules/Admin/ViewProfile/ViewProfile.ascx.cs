@@ -30,9 +30,9 @@ namespace DotNetNuke.Modules.Admin.ViewProfile
     {
         private readonly INavigationManager _navigationManager;
 
-        public ViewProfile()
+        public ViewProfile(INavigationManager navigationManager)
         {
-            this._navigationManager = Globals.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         public override bool DisplayModule

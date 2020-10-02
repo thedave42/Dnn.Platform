@@ -80,9 +80,9 @@ namespace DotNetNuke.UI.ControlPanels
         private List<TabInfo> _hostBaseTabs;
         private List<TabInfo> _hostAdvancedTabs;
 
-        public ControlBar()
+        public ControlBar(INavigationManager navigationManager)
         {
-            this._navigationManager = Globals.DependencyProvider.GetRequiredService<INavigationManager>();
+            this._navigationManager = navigationManager;
         }
 
         public override bool IncludeInControlHierarchy
